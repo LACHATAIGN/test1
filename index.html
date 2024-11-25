@@ -26,19 +26,21 @@
             background-size: cover;
             background-repeat: no-repeat;
             transform: translateX(0);
-            background-image: url('https://th.bing.com/th/id/R.4ac23228b722628aa3681c72073d7523?rik=bjMuvhSIyFotfA&pid=ImgRaw&r=0');
         }
 
         .background {
             z-index: 1;
+            background-image: url('https://i.pinimg.com/originals/e6/ff/21/e6ff21a674abea8ae9a71232301ce802.jpg');
         }
 
         .midground {
             z-index: 2;
+            background-image: url('https://laden-an-der-ecke.de/files/img/dirtFreeze.png');
         }
 
         .foreground {
             z-index: 3;
+            background-image: url('https://th.bing.com/th/id/R.7af0d235c8e1672fd528a87e04fa320e?rik=Kke2MZtveCuvWg&pid=ImgRaw&r=0');
         }
     </style>
 </head>
@@ -56,9 +58,4 @@
 
             layers.forEach((layer, index) => {
                 const movementX = (event.clientX - window.innerWidth / 2) * moveFactor[index];
-                layer.style.transform = `translateX(${movementX}px)`;
-            });
-        });
-    </script>
-</body>
-</html>
+                layer.style.transform = `translateX(${mo
