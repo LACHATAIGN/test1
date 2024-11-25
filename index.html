@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet Parallaxe Horizontal</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .parallax {
+            position: relative;
+            width: 300vw; /* Largeur pour l'effet horizontal */
+            height: 100vh;
+        }
+
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: translateX(0);
+        }
+
+        .background {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Arrière-plan');
+            z-index: 1;
+        }
+
+        .midground {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Plan+intermédiaire');
+            z-index: 2;
+        }
+
+        .foreground {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Premier+plan');
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax">
+        <div class="layer background"></div>
+        <div class="layer midground"></div>
+        <div class="layer foreground"></div>
+    </div>
+
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const layers = document.querySelectorAll('.layer');
+            const moveFactor = [0.1, 0.5, 1]; // Facteurs de mouvement par couche (arrière, intermédiaire, premier)
+
+            layers.forEach((layer, index) => {
+                const movementX = (event.clientX - window.innerWidth / 2) * moveFactor[index];
+                layer.style.transform = `translateX(${movementX}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
