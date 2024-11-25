@@ -22,10 +22,10 @@
         .layer {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 300%; /* Dézoom à 50% */
+            left: -50%; /* Position de départ pour centrer l'animation */
+            width: 300%; /* Permet une animation fluide au-delà des bords */
             height: 100vh;
-            background-size: 50%; /* Dézoom des images */
+            background-size: 50%; /* Taille par défaut des couches arrière et intermédiaire */
             background-repeat: no-repeat;
             transform: translateX(0);
             will-change: transform;
@@ -44,6 +44,7 @@
         .foreground {
             z-index: 3;
             background-image: url('./mobilize_imagedd.png'); /* Utilisation de l'image locale */
+            background-size: 80%; /* Agrandissement à 80% */
         }
     </style>
 </head>
@@ -55,13 +56,18 @@
     </div>
 
     <script>
-        // Détecte le mouvement de la souris
+        // Écoute le mouvement de la souris
         document.addEventListener('mousemove', (event) => {
             const layers = document.querySelectorAll('.layer');
-            const moveFactor = [0.1, 0.3, 0.5]; // Facteurs de mouvement pour chaque plan
+
+            // Centrage de l'animation : calcule la position relative au centre
+            const mouseX = event.clientX - window.innerWidth / 2;
+
+            // Facteurs de mouvement par plan
+            const moveFactor = [0.1, 0.3, 0.5]; // Vitesses différentes pour chaque couche
 
             layers.forEach((layer, index) => {
-                const movementX = (event.clientX - window.innerWidth / 2) * moveFactor[index];
+                const movementX = mouseX * moveFactor[index]; // Applique le facteur de mouvement
                 layer.style.transform = `translateX(${movementX}px)`;
             });
         });
