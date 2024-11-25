@@ -9,23 +9,26 @@
             margin: 0;
             overflow: hidden;
             height: 100vh;
+            background: #000; /* Ajout d'un fond noir pour mieux voir l'effet */
         }
 
         .parallax {
             position: relative;
-            width: 300vw; /* Largeur pour l'effet horizontal */
+            width: 100%;
             height: 100vh;
+            overflow: hidden;
         }
 
         .layer {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
+            width: 300%; /* Dézoom à 50% */
+            height: 100vh;
+            background-size: 50%; /* Dézoom des images */
             background-repeat: no-repeat;
             transform: translateX(0);
+            will-change: transform;
         }
 
         .background {
@@ -40,7 +43,7 @@
 
         .foreground {
             z-index: 3;
-            background-image: url('https://th.bing.com/th/id/R.7af0d235c8e1672fd528a87e04fa320e?rik=Kke2MZtveCuvWg&pid=ImgRaw&r=0');
+            background-image: url('./mobilize_imagedd.png'); /* Utilisation de l'image locale */
         }
     </style>
 </head>
@@ -52,10 +55,16 @@
     </div>
 
     <script>
+        // Détecte le mouvement de la souris
         document.addEventListener('mousemove', (event) => {
             const layers = document.querySelectorAll('.layer');
-            const moveFactor = [0.1, 0.5, 1]; // Facteurs de mouvement par couche (arrière, intermédiaire, premier)
+            const moveFactor = [0.1, 0.3, 0.5]; // Facteurs de mouvement pour chaque plan
 
             layers.forEach((layer, index) => {
                 const movementX = (event.clientX - window.innerWidth / 2) * moveFactor[index];
-                layer.style.transform = `translateX(${mo
+                layer.style.transform = `translateX(${movementX}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
